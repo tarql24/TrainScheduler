@@ -1,0 +1,5 @@
+Use the format from the timesheet activity
+Use bootstraps to style index page
+Connected firebase to store info, worked fine.
+I was not able to figure out the word problem on how to calculate next arrival and minutes to arrival
+Reviewed many many option to try and get moment to work. No success.
