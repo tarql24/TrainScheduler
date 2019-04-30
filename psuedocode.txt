@@ -1,0 +1,5 @@
+1. Use code from timesheet
+2. Connect to firebase
+3. Met with tutor to discuss the js code, not really a success. 
+3a. Discussed js code with co-worker had a better understanding of it. 
+4. ISSUE with code, only shows listings after your insert a train and info and hit submit.
