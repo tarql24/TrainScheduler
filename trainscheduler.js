@@ -41,6 +41,65 @@ $('#add-train-btn').on('click', function(event) {
   // Uploads train data to the database
   database.ref().push(newTrain);
 
+  database.ref().on('child_added', function(childSnapshot) {
+    var trainName = childSnapshot.val().trainName;
+    var cityName = childSnapshot.val().city;
+    var firstTrain = childSnapshot.val().firstTrain;
+    var frequency = childSnapshot.val().frequency;
+
+    // Clears all of the text-boxes
+    $('#train-name-input').val('');
+    $('#city-destination-input').val('');
+    $('#first-train-time-input').val('');
+    $('#frequency-min-input').val('');
+    var firstTrainTimeVariable = moment
+      .duration(childSnapshot.val().firstTrain)
+      .asMinutes();
+    console.log('Looking for this: ', firstTrainTimeVariable);
+
+    // current time in hh:mm format
+    var timeNow = moment().format('HH:mm');
+    // current time in minutes
+    var currentMin = moment.duration(timeNow).asMinutes();
+    // number of minutes passed from first train time till current time
+    var numMin = moment.duration(timeNow).asMinutes() - firstTrainTimeVariable;
+    // frequency of train time
+    var freq = childSnapshot.val().frequency;
+    // time remaining till next train
+    var remaining = numMin % freq;
+    // minutes away from next train
+    var minAway = freq - remaining;
+    // next train arrival in minutes
+    var answer = currentMin + minAway;
+    // function to convert next train arrival minutes to hh:mm a
+    function getTimeFromMin(mins) {
+      if (mins >= 24 * 60 || mins < 0) {
+      }
+      var h = (mins / 60) | 0;
+      var m = mins % 60 | 0;
+
+      return moment
+        .utc()
+        .hours(h)
+        .minutes(m)
+        .format('hh:mm A');
+    }
+
+    var arrivalTime = getTimeFromMin(answer);
+
+    var newRow = $('<tr>').append(
+      $('<td>').text(trainName),
+      $('<td>').text(cityName),
+      $('<td>').text(frequency),
+      $('<td>').text(arrivalTime),
+      $('<td>').text(minAway)
+    );
+
+    //   // // Append the new row to the table
+    $('#train-table > tbody').append(newRow);
+  });
+
+  //   var trainName = childSnapshot;
   // Logs everything to console
   console.log(newTrain.trainName);
   console.log(newTrain.city);
@@ -48,25 +107,25 @@ $('#add-train-btn').on('click', function(event) {
   console.log(newTrain.frequency);
   // console.log(newTrain.dateAdded);
 
-  var newRow = $('<tr>').append(
-    $('<td>').text(trainName),
-    $('<td>').text(cityDestination),
-    $('<td>').text(frequencyMin)
-    // $('<td>').text(arrivalTime),
-    // $('<td>').text(minAway)
-  );
+  //   var newRow = $('<tr>').append(
+  //     $('<td>').text(trainName),
+  //     $('<td>').text(cityDestination),
+  //     $('<td>').text(frequencyMin)
+  //     // $('<td>').text(arrivalTime),
+  //     // $('<td>').text(minAway)
+  //   );
 
-  //   // // Append the new row to the table
-  $('#train-table > tbody').append(newRow);
+  //   //   // // Append the new row to the table
+  //   $('#train-table > tbody').append(newRow);
 
-  // Clears all of the text-boxes
-  $('#train-name-input').val('');
-  $('#city-destination-input').val('');
-  $('#first-train-time-input').val('');
-  $('#frequency-min-input').val('');
+  //   // Clears all of the text-boxes
+  //   $('#train-name-input').val('');
+  //   $('#city-destination-input').val('');
+  //   $('#first-train-time-input').val('');
+  //   $('#frequency-min-input').val('');
 });
 
-// 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+// // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
 // database.ref().on('child_added', function(childSnapshot) {
 //   // this value gives me duration in minutes from the start of the day till the first train time
 //   var firstTrainTimeVariable = moment
@@ -177,36 +236,3 @@ $('#add-train-btn').on('click', function(event) {
 //   console.log(nextArr);
 //   console.log(minAway);
 // // END OF CODE ------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-// Prettify the employee start
-//   var empStartPretty = moment.unix(empStart).format('MM/DD/YYYY');
-
-//   // Calculate the months worked using hardcore math
-//   // To calculate the months worked
-//   var empMonths = moment().diff(moment(empStart, 'X'), 'months');
-//   console.log(empMonths);
-
-//   // Calculate the total billed rate
-//   var empBilled = empMonths * empRate;
-//   console.log(empBilled);
-
-// Create the new row
-// var newRow = $('<tr>').append(
-//   $('<td>').text(trainName),
-//   $('<td>').text(cityDestination),
-//   $('<td>').text(frequency),
-//   $('<td>').text(nextTrainTime),
-//   $('<td>').text(minutesTillArrival)
-// );
-
-// Append the new row to the table
-//   $('#employee-table > tbody').append(newRow);
-// });
-
-// Example Time Math
-// -----------------------------------------------------------------------------
-// Assume Employee start date of January 1, 2015
-// Assume current date is March 1, 2016
-
-// We know that this is 15 months.
-// Now we will create code in moment.js to confirm that any attempt we use meets this test case
