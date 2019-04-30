@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Tracker</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Firebase Reference -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script> -->
+
+    <!-- Moment.js Reference -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <!-- Bootstrap -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    /> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+
+    <!-- Moment.js Reference -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> -->
+
+    <style>
+      #train-table th,
+      td {
+        display: inline-block;
+        width: 20%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Employee Tracker -->
+    <div class="container">
+      <!-- Jumbotron -->
+      <div
+        class="jumbotron"
+        style="background-color: rgb(12, 47, 247); color: white"
+      >
+        <h1 class="text-center">AnyTime is Train Time!!</h1>
+        <h3 class="text-center">
+          Choo Choo. Chee Chee. Toot Toot!
+        </h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Current Trains-->
+          <div class="card mb-4">
+            <div class="card-header text-white bg-primary">
+              Current Time Schedule
+            </div>
+            <div class="card-body">
+              <table class="table table-sm table-hover" id="train-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Tain Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency Time</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                    <!-- <th scope="col">Total Billed ($)</th> -->
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Add Tain  -->
+          <div class="card mb-4">
+            <div class="card-header text-white bg-primary">Add Train</div>
+            <div class="card-body">
+              <!-- Entry Form -->
+              <form>
+                <div class="form-group">
+                  <label for="train-name-input">Train Name</label>
+                  <input
+                    class="form-control"
+                    id="train-name-input"
+                    placeholder="Train 2277"
+                    type="text"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="city-destination-input">Destination</label>
+                  <input
+                    class="form-control"
+                    id="city-destination-input"
+                    placeholder="City Name"
+                    type="text"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="first-train-time-input"
+                    >First Tain Time (HH:mm - military time)</label
+                  >
+                  <input
+                    class="form-control"
+                    id="first-train-time-input"
+                    placeholder="14:30"
+                    type="time"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="frequency-min-input">Frequency (minutes)</label>
+                  <input
+                    class="form-control"
+                    id="frequency-min-input"
+                    placeholder="30"
+                    type="number"
+                  />
+                </div>
+                <button class="btn btn-primary float-left" id="add-train-btn">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="trainscheduler.js"></script>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.js"
+      integrity="sha256-milezx5lakrZu0OP9b2QWFy1ft/UEUK6NH1Jqz8hUhQ="
+      crossorigin="anonymous"
+    ></script> -->
+  </body>
+</html>
